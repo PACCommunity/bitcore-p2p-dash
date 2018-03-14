@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var P2P = require('../../../');
 var Messages = P2P.Messages;
 var sinon = require('sinon');
-var bitcore = require('bitcore-lib-dash');
+var bitcore = require('bitcore-lib-pac');
 
 describe('Command Messages', function() {
 
@@ -62,38 +62,6 @@ describe('Command Messages', function() {
       var message = messages.Transaction(tx);
       message.transaction.version.should.equal(version);
     });
-
-  });
-
-  describe('TXLockRequest', function() {
-
-      it('should accept a transaction instance as an argument', function() {
-          var tx = new bitcore.Transaction();
-          var message = messages.TXLockRequest(tx);
-          message.transaction.should.be.instanceof(bitcore.Transaction);
-      });
-
-      it('should create a transaction instance', function() {
-          var message = messages.TXLockRequest();
-          message.transaction.should.be.instanceof(bitcore.Transaction);
-      });
-
-      it('version should remain the same', function() {
-          var tx = new bitcore.Transaction();
-          var version = Number(tx.version);
-          var message = messages.TXLockRequest(tx);
-          message.transaction.version.should.equal(version);
-      });
-
-      it('should work with Transaction.fromBuffer', function(done) {
-          var Transaction = sinon.stub();
-          Transaction.fromBuffer = function() {
-            done();
-          };
-          var messagesCustom = new Messages({TXLockRequest: Transaction, Transaction: Transaction});
-          var message = messagesCustom.TXLockRequest.fromBuffer();
-          should.exist(message);
-      });
 
   });
 

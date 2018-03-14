@@ -3,7 +3,7 @@
 var should = require('chai').should();
 var P2P = require('../../');
 var Message = P2P.Messages.Message;
-var Networks = require('bitcore-lib-dash').Networks;
+var Networks = require('bitcore-lib-pac').Networks;
 
 describe('Message', function() {
 
@@ -31,7 +31,7 @@ describe('Message', function() {
         return new Buffer(0);
       };
       var buffer = message.toBuffer();
-      var expectedBuffer = new Buffer('bf0c6bbd636f6d6d616e640000000000000000005df6e0e2', 'hex');
+      var expectedBuffer = new Buffer('c8e5612c636f6d6d616e640000000000000000005df6e0e2', 'hex');
       buffer.should.deep.equal(expectedBuffer);
     });
   });
